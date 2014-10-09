@@ -1,0 +1,37 @@
+---
+title: "CCRT Analysis"
+author: "Paul Staab"
+date: "10/08/2014"
+output: html_document
+---
+
+Loading the Data
+----------------------
+The `Chill Coma Recovery Time`-Measurements are saved in the file 
+`ccrt.txt`. We load it using
+
+```{r}
+ccrt <- read.table("~/Downloads/datasets/ccrt.txt", header=TRUE, quote="\"")
+head(ccrt)
+str(ccrt)
+```
+
+Visiual Instpection
+----------------------
+First, lets have a look at the distribution of the data:
+```{r}
+hist(subset(ccrt, population == 'BKK')$ccrt)
+hist(subset(ccrt, population == 'KATH')$ccrt)
+```
+
+For the `KATH` population there seem to be some outliers. Does not look very 
+normal. Let's try stick to non-parametric tests.
+
+Testing for difference
+----------------------
+```{r}
+wilcox.test(subset(ccrt, population == 'BKK')$ccrt, 
+            subset(ccrt, population == 'KATH')$ccrt)
+```
+Seems to be significant!
+
