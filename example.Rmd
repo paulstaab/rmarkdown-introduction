@@ -16,6 +16,7 @@ head(ccrt)
 str(ccrt)
 ```
 
+
 Visiual Instpection
 ----------------------
 First, lets have a look at the distribution of the data:
@@ -25,7 +26,8 @@ hist(subset(ccrt, population == 'KATH')$ccrt)
 ```
 
 For the `KATH` population there seem to be some outliers. Does not look very 
-normal. Let's try stick to non-parametric tests.
+normal. Let's try to stick to non-parametric tests.
+
 
 Testing for difference
 ----------------------
@@ -33,5 +35,6 @@ Testing for difference
 wilcox.test(subset(ccrt, population == 'BKK')$ccrt, 
             subset(ccrt, population == 'KATH')$ccrt)
 ```
-Seems to be significant!
+Seems to be significant! Yay! Hence the means for the CCRT of both population
+are significantly different.
 
