@@ -1,0 +1,98 @@
+---
+title: "A Quick Introduction to R Markdown"
+author: "Paul Staab"
+date: "09.10.2014"
+output: html_document
+---
+
+__R Markdown__ is a simple markup language that can be used to create reports about an 
+stastistical analysis directly _while executing the analysis_. It is a quite convenient way to record
+the analysis -- especially in case you need to explain what you did in, say, three years from 
+now -- and can also be used to convince other researchers (your supervisor, reviewers,...) 
+that your results are solid. It is also designed to ensure a high level of reproducibility of
+your analysis, which is always a major concern when conducting research.
+
+
+Creating an R Markdown Document
+-------------------------------
+In `RStudio`, such reports can be conveniently  created by using the 
+
+    File -> New File -> R Markdown
+    
+menu or by selecting `R Markdown` after clicking the `New File Button` 
+in the toolbar. 
+
+
+Using Markdown
+--------------
+Markdown is a very simplistic format for writing text. RStudio has a `Quick Reference`
+build-in that explains how you add Headers, Lists, Images, Links etc to your document.
+It available by clicking of the `?` button at the top of the document.
+
+
+Adding R Commands
+-----------------
+The main think about R Markdown is that you can add chunks of R code to the document.
+This code get automatically executed when you build ('knit') the document, and all 
+of it's output is inserted into the document, including plots.
+
+Code chunks always start with the line
+
+> ```{r}
+
+where addition options can be inserted after the `r`. Chunks end with
+
+> ```
+
+and everything in-between is executed with R. For instance a chunk
+can load the `iris` data set, print a summary and produce a plot:
+
+```{r}
+data(iris)
+head(iris, n=4)
+library(ggplot2)
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color=Species)) + geom_point()
+```
+
+When knitting a document, first a fresh environment is created to facilitate 
+reproducibility of the report. That in particular implies that you must reload
+all packages you use with the `library()` command before you can use a function
+of the package. Afterwards all chunks are executed sequentially in this
+environment, so the next chunk can use objects created before:
+
+```{r}
+x <- 1:10
+```
+
+And in the next chunk, `x` is still available:
+
+```{r}
+sum(x)
+```
+
+R Markdown documents can be knitted to html, pdf (requires LaTeX installed) and Word documents.
+Use the `Knit` button in the toolbar above the document.
+
+Note that you can also send R commands to the console (`Run` or `CRTL - ENTER`) when writing
+an R Markdown file. As long as the cursor is inside an R chunk, `RStudio` behaves as it would
+when working with an R script.
+
+
+
+Tips
+-------------------
+A common recommendation is that if you conduct an important analysis for a paper, you actually
+**two** reports. One for yourself that contains and explains everything that you tried, and a
+second polish one that just contains the things that worked and are important for the paper. The 
+first one is for yourself to look things up later, the latter to convince the reviewers. 
+
+
+Troubleshooting
+-------------------
+- If you run into problems, try understanding the error message you get, and in particular look if it 
+contains a line number in which the error occurs. Double check that line, and the previous one. 
+- Using a recent version of `RStudio` and `R` is usually a good idea.
+- Try googling the error message.
+- If nothing helps, you often get high quality answers on sites like 
+  [Stack Overflow](https://stackoverflow.com/questions/tagged/r). 
+  Spend some time exactly describing your problem as detailed as possible.
