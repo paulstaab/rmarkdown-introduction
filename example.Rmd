@@ -15,9 +15,15 @@ ccrt <- read.table("~/Downloads/datasets/ccrt.txt", header=TRUE, quote="\"")
 head(ccrt)
 str(ccrt)
 ```
+`CCRT` is the time in seconds that flies needed to recover from a cold shock.
+`Population` is the population of the fly, where 
+
+- `KATH` means the the population was sampled in Kathmandu and 
+- `BKK` means it was sampled in Bangkok.
 
 
-Visiual Instpection
+
+Visual Inspection
 ----------------------
 First, lets have a look at the distribution of the data:
 ```{r}
